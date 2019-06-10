@@ -10,7 +10,7 @@ app.appendChild(container);
 
 
 var request = new XMLHttpRequest();
-request.open('GET', 'http://www.mocky.io/v2/58fda6ce0f0000c40908b8c8', true);
+request.open('GET', 'https://www.mocky.io/v2/58fda6ce0f0000c40908b8c8', true);
 request.onload = function() {
 	// accessing JSON
 	var data = JSON.parse(this.response);

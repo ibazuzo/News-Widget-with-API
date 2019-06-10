@@ -1,0 +1,4 @@
+button.current-page {
+	background: red;
+	transition:  all 200ms ease-in;
+}

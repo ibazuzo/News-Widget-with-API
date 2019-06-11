@@ -1,13 +1,15 @@
-const app = document.getElementById('root');
+const header = document.getElementById('header-left');
+const app = document.getElementById('widget-body');
 
 const container = document.createElement('div');
 container.setAttribute('class', 'container');
 
-var articlesPerPage = 5;
+var itemsPerPage = 5;
 
 
 app.appendChild(container);
 
+// const refreshDataInterval = setInterval(getData, 1000 * 3 * 3);
 
 var request = new XMLHttpRequest();
 request.open('GET', 'https://www.mocky.io/v2/58fda6ce0f0000c40908b8c8', true);
@@ -18,24 +20,26 @@ request.onload = function() {
 	// test for error response
 	if (request.status >= 200 && request.status < 400) {
 
-		var articlesTotalNumber = data.news.length;
+		const news = data.news;
+		var totalPages = Math.ceil(news.length / itemsPerPage);
 
-		insertPagination(articlesTotalNumber);
+		insertPagination(totalPages);
 
 		let pageNumber = 1;
 
-		var timer = setInterval(function() {
-			listNews(pageNumber > (articlesTotalNumber / articlesPerPage) ? pageNumber = 1 : pageNumber++, data);
+		const changePagesInterval = setInterval(function() {
+			listContent(pageNumber > totalPages ? pageNumber = 1 : pageNumber++, news);
 		}, 2000);
 
+
 		document.getElementById('page1').addEventListener('click', function() {
-			listNews(1, data);
+			listContent(1, news);
 		});
 		document.getElementById('page2').addEventListener('click', function() {
-			listNews(2, data);
+			listContent(2, news);
 		});
 		document.getElementById('page3').addEventListener('click', function() {
-			listNews(3, data);
+			listContent(3, news);
 		});
 		// cum pot face asta sa afiseze in functie de nr de pagini?
 
@@ -49,9 +53,9 @@ request.onload = function() {
 
 request.send();
 
-function listNews(pageNumber, data) {
-	const clearNewsList = (elms) => elms.forEach(el => el.remove());
-	clearNewsList(document.querySelectorAll('.card'));
+
+function listContent(pageNumber, news) {
+	removeElements('.card');
 
 	// remove current-page class from previous buttons
 	var els = document.getElementsByClassName('current-page');
@@ -60,42 +64,46 @@ function listNews(pageNumber, data) {
 	// add current-page class to current button
 	document.getElementById('page'+ pageNumber).classList.add('current-page');
 
-	for (let i = 0; i < articlesPerPage; i++) {
-		console.log('i: ' + i, '| pageNumber: ' + pageNumber);
-			var articleToGrab = (pageNumber - 1) * articlesPerPage + i;
+	for (let i = 0; i < itemsPerPage; i++) {
+			var articleToGrab = (pageNumber - 1) * itemsPerPage + i;
 
 			const card = document.createElement('div');
 			card.setAttribute('class', 'card');
 
-			const h2 = document.createElement('h2');
-			h2.setAttribute('class', 'card-title');
-			h2.textContent = data.news[articleToGrab].title;
+			const h3 = document.createElement('h3');
+			h3.setAttribute('class', 'card-title');
+			h3.textContent = news[articleToGrab].title;
 
 			const p = document.createElement('p');
 			p.setAttribute('class', 'card-description');
-			data.news[articleToGrab].details = data.news[articleToGrab].details.substring(0, 100);
-			p.textContent = data.news[articleToGrab].details;
+			news[articleToGrab].details = news[articleToGrab].details.substring(0, 100);
+			p.textContent = news[articleToGrab].details;
 
 			container.appendChild(card);
-			card.appendChild(h2);
+			card.appendChild(h3);
 			card.appendChild(p);	
 		}
 }
 
-function insertPagination(articlesTotalNumber) {
+function insertPagination(totalPages) {
 
-	var noOfPages = articlesTotalNumber / articlesPerPage;
+	removeElements('.page-btn');
 
-	for (let i = 1; i <= noOfPages; i++) {
+	for (let i = 1; i <= totalPages; i++) {
 
 			const page = document.createElement('button');
-			page.setAttribute('class', 'page-' + i);
+			page.setAttribute('class', 'page-btn page-' + i);
 			page.setAttribute('id', 'page' + i);
-			page.textContent = 'Pagina' + i;
-			container.appendChild(page);
+			// page.textContent = i;
+			header.appendChild(page);
 
 		}
 
+}
+
+function removeElements(className) {
+	const clearNewsList = (elms) => elms.forEach(el => el.remove());
+	clearNewsList(document.querySelectorAll(className));
 }
 
 function removeClass(els, className) {

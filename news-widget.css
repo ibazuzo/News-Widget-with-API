@@ -1,4 +1,62 @@
-button.current-page {
-	background: red;
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, sans;
+}
+
+.widget {
+	width: 270px;
+	border: 1px solid #ddd;
+	margin: auto;
+}
+
+#widget-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px 5px 8px 20px;
+	background: #ddd;
+}
+
+#widget-header .widget-title {
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+#header-left .page-btn {
+	border-radius: 50px;
+	border: none;
+	width: 13px;
+	height: 13px;
+	margin-right: 4px;
+	padding: 0;
+	background: #f7f7f7;
+	outline: none;
+}
+
+#header-left .page-btn.current-page {
+	background: #ff5c00;
 	transition:  all 200ms ease-in;
 }
+
+#widget-body {
+	padding: 10px 20px 20px 20px;
+}
+
+.card {
+	margin-top: 25px;
+}
+
+.card-title {
+	margin-bottom: 8px;
+	font-size: 1rem;
+}
+
+.card-description {
+	margin-top: 8px;
+	font-size: 1rem;
+	color: #666;
+}
+

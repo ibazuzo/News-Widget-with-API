@@ -29,7 +29,7 @@ request.onload = function() {
 
 		const changePagesInterval = setInterval(function() {
 			listContent(pageNumber > totalPages ? pageNumber = 1 : pageNumber++, news);
-		}, 2000);
+		}, 15000);
 
 
 		document.getElementById('page1').addEventListener('click', function() {
@@ -41,9 +41,8 @@ request.onload = function() {
 		document.getElementById('page3').addEventListener('click', function() {
 			listContent(3, news);
 		});
-		// cum pot face asta sa afiseze in functie de nr de pagini?
 
-	} else {
+	} else { // list error
 		const errorMessage = document.createElement('p');
 		errorMessage.setAttribute('class', 'error-msg');
 		errorMessage.textContent = 'There was a problem with the connection';
@@ -94,7 +93,6 @@ function insertPagination(totalPages) {
 			const page = document.createElement('button');
 			page.setAttribute('class', 'page-btn page-' + i);
 			page.setAttribute('id', 'page' + i);
-			// page.textContent = i;
 			header.appendChild(page);
 
 		}

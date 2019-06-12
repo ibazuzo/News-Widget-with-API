@@ -25,12 +25,15 @@ request.onload = function() {
 
 		insertPagination(totalPages);
 
-		let pageNumber = 1;
+		// This is a fix because it didn't list the articles for the first run of the setInterval
+		listContent(1, news);
+		let pageNumber = 2;
+		// End fix
 
 		const changePagesInterval = setInterval(function() {
 			listContent(pageNumber > totalPages ? pageNumber = 1 : pageNumber++, news);
-		}, 15000);
-
+			console.log('Primul pas');
+		}, 2000);
 
 		document.getElementById('page1').addEventListener('click', function() {
 			listContent(1, news);
@@ -54,6 +57,7 @@ request.send();
 
 
 function listContent(pageNumber, news) {
+			console.log('Al doilea pas');
 	removeElements('.card');
 
 	// remove current-page class from previous buttons

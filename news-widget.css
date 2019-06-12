@@ -10,6 +10,7 @@ body {
 	width: 270px;
 	margin: auto;
 	border-radius: 5px;
+	margin-top: 50px;
 }
 
 #widget-header {
@@ -36,6 +37,7 @@ body {
 	padding: 0;
 	background: #fff;
 	outline: none;
+	cursor: pointer;
 }
 
 #header-left .page-btn.current-page {
@@ -48,16 +50,16 @@ body {
 }
 
 .card {
-	margin-top: 25px;
+	margin-top: 20px;
 }
 
 .card-title {
-	margin-bottom: 8px;
+	margin-bottom: 5px;
 	font-size: 1rem;
 }
 
 .card-description {
-	margin-top: 8px;
+	margin-top: 5px;
 	font-size: 0.9rem;
 	color: #666;
 }

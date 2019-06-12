@@ -33,7 +33,7 @@ request.onload = function() {
 		const changePagesInterval = setInterval(function() {
 			listContent(pageNumber > totalPages ? pageNumber = 1 : pageNumber++, news);
 			console.log('Primul pas');
-		}, 2000);
+		}, 15000);
 
 		document.getElementById('page1').addEventListener('click', function() {
 			listContent(1, news);
